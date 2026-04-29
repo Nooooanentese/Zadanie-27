@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input id="a" placeholder="Liczba 1">
+<input id="b" placeholder="Liczba 2">
+<button onclick="suma()">suma</button>
+<button onclick="podstawy()">podstawy</button>
+<button onclick="kalkulator()">kalk</button>
+
+<br><br>
+
+<input id="c" placeholder="Liczba 3">
+<button onclick="maks()">mak</button>
+
+<br><br>
+
+<input id="wzrost" placeholder="Wzrost cm">
+<button onclick="wzrost()">wzrost</button>
+
+<br><br>
+
+<input id="h" placeholder="Wzrost cm">
+<input id="w" placeholder="Waga kg">
+<button onclick="BMI()">BMI</button>
+
+<br><br>
+
+<input id="d1" placeholder="Data 1">
+<input id="d2" placeholder="Data 2">
+<button onclick="starszy()">starszy</button>
+
+<br><br>
+
+<input id="rok" placeholder="Rok">
+<button onclick="przestepny()">przestepny</button>
+
+<br><br>
+
+<input id="haslo" placeholder="Hasło" oninput="sila()">
+<div id="sila"></div>
+
+<br>
+
+<input id="t1" placeholder="Bok 1">
+<input id="t2" placeholder="Bok 2">
+<input id="t3" placeholder="Bok 3">
+<button onclick="trojkat()">trojkat</button>
+
+<br><br>
+
+<input id="tekst" oninput="szyfr()">
+<span id="szyfr"></span>
+
+<br><br>
+
+<select id="op">
+<option value="+">+</option>
+<option value="-">-</option>
+<option value="*">*</option>
+<option value="/">/</option>
+</select>
+
+<div id="wynik"></div>
+
+<script>
+function suma(){
+let a=+document.getElementById("a").value
+let b=+document.getElementById("b").value
+alert(a+b)
+}
+
+function podstawy(){
+let a=+document.getElementById("a").value
+let b=+document.getElementById("b").value
+alert("Różnica: "+(a-b)+" Iloczyn: "+(a*b)+" Iloraz: "+(a/b))
+}
+
+function kalkulator(){
+let a=+document.getElementById("a").value
+let b=+document.getElementById("b").value
+let op=document.getElementById("op").value
+let w
+if(op=="+") w=a+b
+if(op=="-") w=a-b
+if(op=="*") w=a*b
+if(op=="/") w=a/b
+document.getElementById("wynik").innerHTML=w
+}
+
+function maks(){
+let a=+document.getElementById("a").value
+let b=+document.getElementById("b").value
+let c=+document.getElementById("c").value
+alert(Math.max(a,b,c))
+}
+
+function wzrost(){
+let w=+document.getElementById("wzrost").value
+if(w<150) alert("niski")
+else if(w>180) alert("wysoki")
+else alert("średni")
+}
+
+function BMI(){
+let h=+document.getElementById("h").value/100
+let w=+document.getElementById("w").value
+let bmi=w/(h*h)
+let txt=""
+if(bmi<18.5) txt="za mało!"
+else if(bmi>25) txt="za dużo!"
+else txt="OK!"
+document.getElementById("wynik").innerHTML=bmi.toFixed(2)+" "+txt
+}
+
+function starszy(){
+let d1=new Date(document.getElementById("d1").value)
+let d2=new Date(document.getElementById("d2").value)
+if(d1<d2) alert("Pierwsza osoba starsza")
+else alert("Druga osoba starsza")
+}
+
+function przestepny(){
+let r=+document.getElementById("rok").value
+if((r%4==0 && r%100!=0) || r%400==0) console.log("Przestępny")
+else console.log("Nieprzestępny")
+}
+
+function sila(){
+let h=document.getElementById("haslo").value
+let s="mocne"
+if(h.length<=4) s="słabe"
+else if(h.length<=8) s="średnie"
+if(!/[0-9]/.test(h)) s="słabe"
+if(!/[A-Z]/.test(h)) s="słabe"
+if(!/[a-z]/.test(h)) s="słabe"
+if(!/[^A-Za-z0-9]/.test(h)) s="słabe"
+document.getElementById("sila").innerHTML=s
+}
+
+function trojkat(){
+let a=+document.getElementById("t1").value
+let b=+document.getElementById("t2").value
+let c=+document.getElementById("t3").value
+if(a+b>c && a+c>b && b+c>a) console.log("Da się")
+else console.log("Nie da się")
+}
+
+function SZYFR(){
+let t=document.getElementById("tekst").value
+let out=""
+for(let i=0;i<t.length;i++){
+let c=t[i]
+if(c>='a' && c<='z'){
+out+=String.fromCharCode((c.charCodeAt(0)-97+2)%26+97)
+}else if(c>='A' && c<='Z'){
+out+=String.fromCharCode((c.charCodeAt(0)-65+2)%26+65)
+}else out+=c
+}
+document.getElementById("szyfr").innerHTML=out
+}
+</script>
+
+</body>
+</html>
